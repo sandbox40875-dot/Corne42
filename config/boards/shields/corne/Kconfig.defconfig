@@ -1,0 +1,28 @@
+if SHIELD_CORNE_LEFT
+
+# Left half acts as central (connects to computer)
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+endif
+
+
+if SHIELD_CORNE_LEFT || SHIELD_CORNE_RIGHT
+
+# Enable split keyboard
+config ZMK_SPLIT
+    default y
+
+# Bluetooth device name
+config BT_DEVICE_NAME
+    default "MK42Keyboard"
+
+# Allow multiple paired devices
+config BT_MAX_PAIRED
+    default 5
+
+# Improve BLE compatibility
+config ZMK_BLE_PASSKEY_ENTRY
+    default n
+
+endif

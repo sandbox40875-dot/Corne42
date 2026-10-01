@@ -1,0 +1,202 @@
+/*
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
+
+/ {
+    /* =========================
+     * MACROS
+     * ========================= */
+
+    macros {
+        email: email {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp H &kp A &kp R &kp W>,
+                <&macro_wait_time 10>,
+                <&kp I &kp N>,
+                <&macro_wait_time 13>,
+                <&kp D &kp E &kp R>,
+                <&macro_wait_time 11>,
+                <&kp DOT &kp S &kp I>,
+                <&macro_wait_time 9>,
+                <&kp N &kp G &kp H &kp AT>,
+                <&macro_wait_time 8>,
+                <&kp P &kp H &kp I>,
+                <&macro_wait_time 12>,
+                <&kp L &kp I &kp P &kp S>,
+                <&macro_wait_time 14>,
+                <&kp DOT>,
+                <&macro_wait_time 12>,
+                <&kp C &kp O &kp M>;
+
+            label = "EMAIL";
+        };
+
+        Rimku: Rimku {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp LS(R)>,
+                <&macro_wait_time 10>,
+                <&kp EXCL>,
+                <&macro_wait_time 12>,
+                <&kp M>,
+                <&macro_wait_time 7>,
+                <&kp K>,
+                <&macro_wait_time 12>,
+                <&kp U>,
+                <&macro_wait_time 10>,
+                <&kp N5>,
+                <&macro_wait_time 9>,
+                <&kp I>,
+                <&macro_wait_time 9>,
+                <&kp S &kp E>,
+                <&macro_wait_time 7>,
+                <&kp AT>;
+
+            label = "RIMKU";
+        };
+
+        firewall: firewall {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings =
+                <&kp LS(F)>,
+                <&macro_wait_time 10>,
+                <&kp EXCL>,
+                <&macro_wait_time 11>,
+                <&kp R>,
+                <&macro_wait_time 19>,
+                <&kp E>,
+                <&macro_wait_time 7>,
+                <&kp W>,
+                <&macro_wait_time 8>,
+                <&kp AT>,
+                <&macro_wait_time 7>,
+                <&kp L &kp L>,
+                <&macro_wait_time 7>,
+                <&kp AT_SIGN>;
+
+            label = "FIREWALL";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        gaming {
+            bindings = <&tog 3>;
+            key-positions = <34 35 33>;
+            layers = <0 3>;
+        };
+
+        Enter {
+            bindings = <&kp ENTER>;
+            key-positions = <16 17>;
+            layers = <0 4>;
+        };
+
+        back {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <4 5>;
+            layers = <0 4>;
+        };
+
+        NFILE {
+            bindings = <&kp LC(N)>;
+            key-positions = <27 28>;
+        };
+
+        print {
+            bindings = <&kp PRINTSCREEN>;
+            key-positions = <36 37 38>;
+            layers = <0>;
+        };
+
+        appswitch {
+            bindings = <&kp LA(TAB)>;
+            key-positions = <25 26>;
+            layers = <0>;
+        };
+
+        lt4 {
+            bindings = <&tog 4>;
+            key-positions = <5 17 29>;
+            layers = <0 4>;
+        };
+
+        caps {
+            bindings = <&kp CAPSLOCK>;
+            key-positions = <12 14 13>;
+            layers = <0>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        /* =========================================================
+         * BASE LAYER
+         * ========================================================= */
+
+        base {
+            bindings = <
+&lt 4 ESCAPE    &kp Q         &kp W    &kp E         &kp R      &kp T          &kp Y      &kp U        &kp I       &kp O      &kp P      &kp BACKSPACE
+&kp LEFT_SHIFT  &kp A         &kp S    &kp D         &kp F      &kp G          &kp H      &kp J        &kp K       &kp L      &kp SQT    &kp RIGHT_SHIFT
+&kp LCTRL       &kp LEFT_ALT  &lt 4 Z  &kp X         &kp C      &kp V          &kp B      &kp N        &kp M       &kp COMMA  &kp SLASH  &kp DELETE
+                                       &kp LEFT_GUI  &lt 1 TAB  &lt 2 SPACE    &kp ENTER  &lt 1 COLON  &kp PERIOD
+            >;
+        };
+
+        numpad {
+            bindings = <
+&kp TILDE  &kp EXCLAMATION  &kp AT_SIGN      &kp HASH              &kp DOLLAR         &kp PERCENT    &kp CARET       &kp N7         &kp N8      &kp N9  &kp N0     &trans
+&trans     &kp AMPERSAND    &kp ASTERISK     &kp LEFT_PARENTHESIS  &kp LEFT_BRACKET   &kp PLUS       &kp MINUS       &kp N4         &kp N5      &kp N6  &kp EQUAL  &trans
+&trans     &kp LEFT_BRACE   &kp RIGHT_BRACE  &kp RPAR              &kp RIGHT_BRACKET  &kp PIPE       &kp UNDERSCORE  &kp N1         &kp N2      &kp N3  &kp FSLH   &trans
+                                             &trans                &trans             &trans         &trans          &kp SEMICOLON  &kp PERIOD
+            >;
+        };
+
+        fn {
+            bindings = <
+&trans  &kp F1        &kp F2        &kp F3        &kp F4        &kp F5          &kp F6     &kp F7  &kp F8  &kp F9  &kp F10               &kp F11
+&trans  &trans        &none         &none         &out OUT_BLE  &out OUT_USB    &none      &none   &none   &none   &none                 &kp F12
+&trans  &bt BT_SEL 4  &bt BT_SEL 3  &bt BT_SEL 2  &bt BT_SEL 1  &bt BT_SEL 0    &none      &none   &none   &none   &kp NON_US_BACKSLASH  &none
+                                    &none         &none         &trans          &kp ENTER  &none   &none
+            >;
+        };
+
+        gaming {
+            bindings = <
+&kp ESC         &kp Q     &kp W  &kp E          &kp R              &kp T        &kp Y      &kp U      &kp I         &kp O      &kp P      &kp BACKSPACE
+&kp LEFT_SHIFT  &kp A     &kp S  &kp D          &kp F              &kp G        &kp H      &kp J      &kp K         &kp L      &kp SQT    &kp RSHFT
+&kp LCTRL       &kp LALT  &kp Z  &kp X          &kp C              &kp V        &kp B      &kp N      &kp M         &kp COMMA  &kp SLASH  &kp DEL
+                                 &kp RIGHT_ALT  &kp RIGHT_CONTROL  &kp SPACE    &kp ENTER  &kp COLON  &kp LEFT_GUI
+            >;
+        };
+
+        arrrow {
+            bindings = <
+&trans        &lt 5 Q         &kp UP_ARROW    &none            &none      &kp C_VOLUME_UP      &none   &none  &none  &none  &none  &trans
+&kp CAPSLOCK  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans     &kp C_VOLUME_DOWN    &none   &none  &none  &none  &none  &none
+&trans        &none           &none           &none            &none      &none                &none   &none  &none  &none  &none  &none
+                                              &none            &kp ENTER  &trans               &trans  &none  &none
+            >;
+        };
+
+        macro {
+            bindings = <
+&none  &none  &none  &none  &Rimku      &none             &none  &none  &none  &none  &email  &none
+&none  &none  &none  &none  &firewall   &none             &none  &none  &none  &none  &none   &none
+&none  &none  &none  &none  &bt BT_CLR  &bt BT_CLR_ALL    &none  &none  &none  &none  &none   &none
+                     &none  &none       &none             &none  &none  &none
+            >;
+        };
+    };
+};
