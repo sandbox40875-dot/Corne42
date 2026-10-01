@@ -1,0 +1,3 @@
+name: corne42_power_aware_display
+build:
+  cmake: .
